@@ -30,6 +30,7 @@ public class NetworkUtil {
 
     /**
      * 获取当前网络类型
+     *
      * @return
      */
     public static NetType getNetType() {
@@ -43,11 +44,7 @@ public class NetworkUtil {
         int nType = networkInfo.getType();
 
         if (nType == ConnectivityManager.TYPE_MOBILE) {
-            if (networkInfo.getExtraInfo().toLowerCase().equals("cmnet")) {
-                return NetType.CMNET;
-            } else {
-                return NetType.CMWAP;
-            }
+            return NetType.MOBILE;
         } else if (nType == ConnectivityManager.TYPE_WIFI) {
             return NetType.WIFI;
         }

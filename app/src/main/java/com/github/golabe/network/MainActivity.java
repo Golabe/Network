@@ -26,16 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "network: 有网络");
                 break;
             case WIFI:
-                Log.d(TAG, "network: wifi");
+                Log.d(TAG, "network: WIFI网络");
                 break;
-            case CMNET:
-                Log.d(TAG, "network: cmnet");
-                break;
-            case CMWAP:
-                Log.d(TAG, "network: cmwap");
+            case MOBILE:
+                Log.d(TAG, "network: 移动网络");
                 break;
             case NONE:
-                Log.d(TAG, "network: none");
+                Log.d(TAG, "network: 没网络");
                 break;
         }
     }

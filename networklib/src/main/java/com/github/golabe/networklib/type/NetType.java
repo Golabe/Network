@@ -4,8 +4,7 @@ public enum NetType {
 //    有网络
     AUTO,
     WIFI,
-    CMNET,
-    CMWAP,
+    MOBILE,
     NONE
 
 }
