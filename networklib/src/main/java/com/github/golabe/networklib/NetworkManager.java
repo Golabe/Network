@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.github.golabe.networklib.annotaion.MethodManager;
 import com.github.golabe.networklib.annotaion.Network;
+import com.github.golabe.networklib.listener.NetworkChangeListener;
 import com.github.golabe.networklib.receiver.NetworkCallbackImpl;
 import com.github.golabe.networklib.receiver.NetworkStateReceiver;
 import com.github.golabe.networklib.type.NetType;
@@ -17,7 +18,6 @@ import com.github.golabe.networklib.type.NetType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +27,7 @@ public class NetworkManager implements NetworkChangeListener {
     private static final String TAG = "NetworkManager";
     private Application application;
     private Map<Object, List<MethodManager>> networkList;
+    private NetworkStateReceiver receiver;
 
     @Override
     public void onNetworkPost(NetType netType) {
@@ -57,7 +58,7 @@ public class NetworkManager implements NetworkChangeListener {
             ConnectivityManager connManager = (ConnectivityManager) NetworkManager.getDefault().getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connManager != null) connManager.registerNetworkCallback(request, networkCallback);
         } else {
-            NetworkStateReceiver receiver = new NetworkStateReceiver(this);
+            receiver = new NetworkStateReceiver(this);
             IntentFilter filter = new IntentFilter();
             filter.addAction(Constants.ANDROID_NET_CHANGE_ACTION);
             application.registerReceiver(receiver, filter);
@@ -133,6 +134,14 @@ public class NetworkManager implements NetworkChangeListener {
     public void unregister(Object obj) {
         if (!networkList.isEmpty()) {
             networkList.remove(obj);
+        }
+        unregisterReceiver();
+
+    }
+
+    private void unregisterReceiver() {
+        if (receiver != null&&receiver.isOrderedBroadcast()) {
+            application.unregisterReceiver(receiver);
         }
     }
 

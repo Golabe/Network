@@ -1,16 +1,16 @@
 package com.github.golabe.networklib.receiver;
 
+import android.annotation.TargetApi;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
-import com.github.golabe.networklib.NetworkChangeListener;
+import com.github.golabe.networklib.listener.NetworkChangeListener;
 import com.github.golabe.networklib.type.NetType;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class NetworkCallbackImpl extends ConnectivityManager.NetworkCallback {
 
     private static final String TAG = "NetworkCallbackImpl";
