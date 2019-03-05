@@ -4,7 +4,7 @@
 ## gradle 添加
 ```xml
 implementation'com.github.golabe.network:networklib:1.0.0'
-xml```
+```
 
 ## application  初始化
 ```java
@@ -13,4 +13,4 @@ xml```
         super.onCreate();
         NetworkManager.getDefault().init(this);
     }
-java```
+```
